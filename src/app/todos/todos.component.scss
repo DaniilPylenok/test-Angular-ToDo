@@ -1,0 +1,10 @@
+ul {
+  li {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.done {
+  text-decoration: line-through;
+}

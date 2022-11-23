@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let todo of todoService.todos">
+    <span [class.done]="todo.completed">
+      <input type="checkbox" [checked]="todo.completed" (change)="onChange(todo.id)">
+      {{todo.title}}
+    </span> 
+    <small>{{todo.createdAt | date:'short'}}</small>
+    <button (click)="deleteTodo(todo.id)">удалить</button>
+  </li>
+</ul>
