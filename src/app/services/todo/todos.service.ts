@@ -16,9 +16,9 @@ export class TodoService {
   public todos: Todo[] = [
     {
       id: 0,
-      title: 'Сделать списо дел на ангуляре',
-      createdAt: new Date().toISOString(),
-      completed: false,
+      title: 'Сделать список дел на ангуляре',
+      createdAt: '11/24/22, 0:48 AM',
+      completed: true,
       children: [],
     },
   ];

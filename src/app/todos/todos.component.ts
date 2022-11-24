@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo, TodoService } from '../servicec/todo/todos.service';
+import { TodoService } from '../services/todo/todos.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,8 +12,7 @@ export class TodosComponent implements OnInit {
   public sesearchTitle = '';
 
   ngOnInit() {
-    this.todoService.fetchGet()
-    
+    this.todoService.fetchGet();
   }
 
   onChange(id: number) {
