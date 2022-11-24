@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
 
 export interface Todo {
   id: number;
@@ -13,6 +12,7 @@ export interface Todo {
 @Injectable({ providedIn: 'root' })
 export class TodoService {
   constructor(public http: HttpClient) {}
+  public searchTitle: string = '';
   public todos: Todo[] = [
     {
       id: 0,
@@ -33,12 +33,25 @@ export class TodoService {
 
   onAddition(title: string) {
     const todo: Todo = {
-      id: this.todos.length,
+      id: new Date().getMilliseconds(),
       title: title,
       createdAt: new Date().toISOString(),
       completed: false,
       children: [],
     };
     this.todos.push(todo);
+  }
+
+  changeTitle(id: number, title: string) {
+    this.todos.forEach((task) => {
+      if (task.id === id) {
+        task.title = title;
+      }
+    });
+  }
+  fetchGet() {
+    this.http
+      .get<Todo[]>('http://onkrugot.beget.tech/')
+      .subscribe((todoList) => this.todos.push(...todoList));
   }
 }

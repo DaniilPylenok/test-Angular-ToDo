@@ -11,7 +11,7 @@ export class AppComponent {
   constructor(public todoService: TodoService) {}
   addTodo() {
     const title: string | null = prompt('Введите заголовок задачи', '');
-    if (typeof title === 'string' && title.length) {
+    if (typeof title === 'string' && title.trim().length) {
       this.todoService.onAddition(title);
     }
   }

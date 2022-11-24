@@ -1,10 +1,44 @@
 <ul>
-  <li *ngFor="let todo of todoService.todos">
-    <span [class.done]="todo.completed">
-      <input type="checkbox" [checked]="todo.completed" (change)="onChange(todo.id)">
-      {{todo.title}}
-    </span> 
-    <small>{{todo.createdAt | date:'short'}}</small>
-    <button (click)="deleteTodo(todo.id)">удалить</button>
+  <!-- фильтрация по имеющимся задачам -->
+  <div>
+    <input
+      type="text"
+      placeholder="Введите что вы ищете"
+      [(ngModel)]="sesearchTitle"
+    />
+  </div>
+  <!---------->
+
+  <!-- добавление новых задач -->
+  <div class="module-create-task">
+    <p>Добавить новую задачку</p>
+    <button (click)="addTodo()" type="button">Добавить</button>
+  </div>
+  <!---------->
+
+  <!-- рендер имеющихся задач и их изменение -->
+  <li *ngFor="let todo of todoService.todos | todoFilter: sesearchTitle">
+    <div>
+      <span [class.done]="todo.completed">
+        <input
+          type="checkbox"
+          [checked]="todo.completed"
+          (change)="onChange(todo.id)"
+        />
+        {{ todo.title }} , {{ todo.createdAt | date: "short" }}
+      </span>
+    </div>
+    <div>
+      <button (click)="updateTodo(todo.id)">
+        <img
+          src="../../assets/pen.svg"
+          width="17px"
+          height="17px"
+          alt="Изменить"
+        />
+      </button>
+      <button (click)="deleteTodo(todo.id)">Удалить</button>
+    </div>
   </li>
+  <!---------->
 </ul>

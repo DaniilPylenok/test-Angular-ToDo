@@ -9,11 +9,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodosComponent implements OnInit {
   constructor(public todoService: TodoService, public http: HttpClient) {}
+  public sesearchTitle = '';
 
   ngOnInit() {
-    this.http
-      .get<Todo[]>('http://onkrugot.beget.tech/')
-      .subscribe((todoList) => (this.todoService.todos.push(...todoList)));
+    this.todoService.fetchGet()
+    
   }
 
   onChange(id: number) {
@@ -24,7 +24,17 @@ export class TodosComponent implements OnInit {
     this.todoService.onDeleted(id);
   }
 
-  addTodo(title: string) {
-    this.todoService.onAddition(title)
+  addTodo() {
+    const title: string | null = prompt('Введите заголовок задачи', '');
+    if (typeof title === 'string' && title.trim().length) {
+      this.todoService.onAddition(title);
+    }
+  }
+
+  updateTodo(id: number) {
+    const title: string | null = prompt('Введите новый заголовок задачи', '');
+    if (typeof title === 'string' && title.trim().length) {
+      this.todoService.changeTitle(id, title);
+    }
   }
 }
